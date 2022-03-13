@@ -1,0 +1,3 @@
+## Check of the disk drive devices are available
+
+$ lsblk
