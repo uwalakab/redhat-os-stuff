@@ -1,3 +1,41 @@
 ## Check of the disk drive devices are available
 
-$ lsblk
+# lsblk
+
+# parted
+
+(parted) mklabel msdos
+
+(parted) mkpart
+
+(parted) u GiB
+
+# lsblk (see partitions)
+
+# pvcreate /dev/sdb1 /dev/sdb2
+
+Or if there are several partitions in numerical order..... (E.g. /dev/sdb1 to /dev/sdb5)
+
+# pvcreate /dev/sdb[1..5]
+
+# vgcreate VG_name /dev/sdb1 /dev/sdb2
+
+OR if you need to set the extent size
+
+# vgcreate -s 32MiB VG_name /dev/sdb1 /dev/sdb2
+
+Above will create a Volume Group from the Physical Volumes where the extents on disk are 32MiB each (default is 4MiB)
+
+# lvcreate -L 20GiB VG_name
+
+-l|--extents Number[PERCENT]
+
+Specifies the size of the new LV in logical extents. The --size and --extents options are alternate methods of specifying size.
+The total number of physical extents used will be greater when redundant data is needed for RAID levels.
+An alternate syntax allows the size to be determined indirectly as a percentage of the size of a related VG, LV, or set of PVs.
+The suffix %VG denotes the total size of the VG.
+The suffix %FREE the remaining free space in the VG.
+The suffix %PVS the free space in the specified PVs.
+For a snapshot, the size can be expressed as a percentage of the total size of the origin LV with the suffix %ORIGIN (100%ORIGIN provides space for the whole origin).
+When expressed as a percentage, the size defines an upper limit for the number of logical extents in the new LV.
+The precise number of logical extents in the new LV is not determined until the command has completed.
