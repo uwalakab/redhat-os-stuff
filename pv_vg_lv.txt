@@ -16,7 +16,7 @@
 
 Or if there are several partitions in numerical order..... (E.g. /dev/sdb1 to /dev/sdb5)
 
-# pvcreate /dev/sdb[1..5]
+# pvcreate /dev/sdb{1..5}
 
 # vgcreate VG_name /dev/sdb1 /dev/sdb2
 
